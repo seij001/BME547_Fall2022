@@ -32,5 +32,5 @@ def output_HDL_result(HDL_value, charac):
     print("The results for an HDL value of {} is {}".format(HDL_value, charac))
     
 
-interface() #this line will make the interface run again and you can enter HDL value again
+interface() #this line in main part of script will make the interface run
 
