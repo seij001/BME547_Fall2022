@@ -1,15 +1,18 @@
 def interface():
     print("Blood Calculator")
     print("Options:")
+    print("1 - Analyze HDL")
     print("9 - Quit")
     keep_running = True
     while keep_running:
         choice = input("Enter your choice: ")
         if choice == '9':
             return
+        elif choice == '1':
+            HDL_driver()
 
 def user_input():
-    user_HDL = input("Type your HDL result")
+    user_HDL = input("Enter your HDL result: ")
     return int(user_HDL) #since the input is string by default
 
 def check_HDL(HDL_value):
@@ -29,5 +32,5 @@ def output_HDL_result(HDL_value, charac):
     print("The results for an HDL value of {} is {}".format(HDL_value, charac))
     
 
-interface()
+interface() #this line will make the interface run again and you can enter HDL value again
 
