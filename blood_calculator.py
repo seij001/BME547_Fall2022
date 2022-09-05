@@ -45,4 +45,12 @@ def check_LDL(LDL_value):
     else:
         return "Very High"  
 
+def LDL_driver():
+    LDL_value = user_input()
+    answer = check_LDL(LDL_value)
+    output_LDL_result(LDL_value, answer) #because function doesn't process this simultaneously, output_LDL_result can be defined later
+
+def output_LDL_result(LDL_value, charac):
+    print("The results for an LDL value of {} is {}".format(LDL_value, charac))
+
 interface() #this line in main part of script will make the interface run
