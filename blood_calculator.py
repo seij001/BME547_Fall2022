@@ -2,6 +2,7 @@ def interface():
     print("Blood Calculator")
     print("Options:")
     print("1 - Analyze HDL")
+    print("2 - Analyze LDL")
     print("9 - Quit")
     keep_running = True
     while keep_running:
