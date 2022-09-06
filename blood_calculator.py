@@ -54,4 +54,17 @@ def LDL_driver():
 def output_LDL_result(LDL_value, charac):
     print("The results for an LDL value of {} is {}".format(LDL_value, charac))
 
+#Total cholesterol
+def check_total(HDL_value, LDL_value):
+    total = HDL_value + LDL_value
+    if total<200:
+        return "Normal"
+    elif 200 <= total <= 239:
+        return "Borderline High"
+    else:
+        return "High"
+
+    
+
+
 interface() #this line in main part of script will make the interface run
