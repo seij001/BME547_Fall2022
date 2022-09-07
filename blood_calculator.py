@@ -80,4 +80,6 @@ def total_driver():
 def output_total_result(total, charac):
     print("Your total cholesterol of {} is {}".format(total, charac))
 
-interface() #this line in main part of script will make the interface run
+#I want the line below only if it's the main module
+if __name__ == "__main__":
+    interface() #this line in main part of script will make the interface run
