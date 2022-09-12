@@ -22,11 +22,14 @@ def format_output(weight, dosage_mg_first_day):
     print("  the correct dosage is {:.1f} mg the first day"
           .format(dosage_mg_first_day))
 
-def dose_amount(diagnosis):
+def weight_input():
     print("PATIENT WEIGHT")
     print("Enter patient weight followed by units of kg or lb.")
     print("Examples:  65.3 lb      21.0 kg")
     weight_input = input("Enter weight: ")
+    return weight_input
+
+def dose_amount(diagnosis, weight_input):
     weight_data = weight_input.split(" ")
     weight = float(weight_data[0])
     units = weight_data[1]
