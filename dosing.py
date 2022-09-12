@@ -5,13 +5,7 @@
              type of medical treatment or diagnostics.
 """
 
-def format_output(weight, dosage_mg_first_day):
-    print("CORRECT DOSAGE")
-    print("For a patient weighing {:.1f} kg,".format(weight))
-    print("  the correct dosage is {:.1f} mg the first day"
-          .format(dosage_mg_first_day))
-
-def dose_amount():
+def choose_diagnosis():
     print("Day One Dosing Guidelines")
     print("")
     print("Choose diagnosis:")
@@ -20,6 +14,15 @@ def dose_amount():
     print("3 - Community-acquired pneumonia")
     print("4 - Pharyngitis/tonsilitis")
     diagnosis = int(input("Enter a number: "))
+    return diagnosis
+
+def format_output(weight, dosage_mg_first_day):
+    print("CORRECT DOSAGE")
+    print("For a patient weighing {:.1f} kg,".format(weight))
+    print("  the correct dosage is {:.1f} mg the first day"
+          .format(dosage_mg_first_day))
+
+def dose_amount(diagnosis):
     print("PATIENT WEIGHT")
     print("Enter patient weight followed by units of kg or lb.")
     print("Examples:  65.3 lb      21.0 kg")
