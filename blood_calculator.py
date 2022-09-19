@@ -80,4 +80,5 @@ def total_driver():
 def output_total_result(total, charac):
     print("Your total cholesterol of {} is {}".format(total, charac))
 
-interface() #this line in main part of script will make the interface run
+if __name__ == "__main__":
+    interface() #this line in main part of script will make the interface run
