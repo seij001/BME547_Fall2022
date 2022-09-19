@@ -20,6 +20,15 @@ def test_check_LDL(input_LDL, expected):
     answer = check_LDL(input_LDL)
     assert answer == expected
 
+@pytest.mark.parametrize("input_total, expected", 
+[(150, "Normal"),
+(210, "Borderline High"),
+(300, "High")])
+def test_check_total(input_total, expected):
+    from blood_calculator import check_total
+    answer = check_total(input_total)
+    assert answer == expected
+
 '''
 def test_check_HDL_BorderlineLow():
     from blood_calculator import check_HDL
