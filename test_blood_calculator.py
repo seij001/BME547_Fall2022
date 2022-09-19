@@ -1,13 +1,23 @@
 import pytest
 
-@pytest.mark.parametrize("input_one, expected", 
+@pytest.mark.parametrize("input_HDL, expected", 
 #needs to be the string version of the exact parameters of function
 [(85, "Normal"), #These are test cases I want, tuple of arguments
 (50, "Borderline Low"),
 (30, "Low")])
-def test_check_HDL(input_one, expected):
+def test_check_HDL(input_HDL, expected):
     from blood_calculator import check_HDL
-    answer = check_HDL(input_one) #the variable name doesn't need to be answer
+    answer = check_HDL(input_HDL) #the variable name doesn't need to be answer
+    assert answer == expected
+
+@pytest.mark.parametrize("input_LDL, expected", 
+[(100, "Normal"),
+(140, "Borderline High"),
+(180, "High"),
+(200, "Very High")])
+def test_check_LDL(input_LDL, expected):
+    from blood_calculator import check_LDL
+    answer = check_LDL(input_LDL)
     assert answer == expected
 
 '''
