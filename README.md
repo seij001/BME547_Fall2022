@@ -17,6 +17,3 @@ The database will contain:
     - Test Result
     1. HDL
     2. LDL
-
-## Future Improvements (0918 Lecture)
-* Add blood type
