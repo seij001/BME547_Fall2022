@@ -17,18 +17,22 @@ def interface():
         elif choice == '3':
             total_driver()
 
+
 def user_input():
     user_value = input("Enter your value: ")
-    return int(user_value) #since the input is string by default
+    return int(user_value)  # since the input is string by default
 
-#HDL
+# HDL
+
+
 def check_HDL(HDL_value):
     if HDL_value >= 60:
         return "Normal"
-    elif 40 <= HDL_value <60: #python can use this notation for compound inequality
+    elif 40 <= HDL_value < 60:  # can use this notation for compound inequality
         return "Borderline Low"
     else:
         return "Low"
+
 
 def HDL_driver():
     print("HDL")
@@ -36,37 +40,47 @@ def HDL_driver():
     answer = check_HDL(HDL_value)
     output_HDL_result(HDL_value, answer)
 
+
 def output_HDL_result(HDL_value, charac):
     print("The results for an HDL value of {} is {}".format(HDL_value, charac))
 
-#LDL
+# LDL
+
+
 def check_LDL(LDL_value):
     if LDL_value < 130:
         return "Normal"
-    elif 130 <= LDL_value <= 159: #python can use this notation for compound inequality
+    elif 130 <= LDL_value <= 159:
         return "Borderline High"
     elif 160 <= LDL_value <= 189:
         return "High"
     else:
-        return "Very High"  
+        return "Very High"
+
 
 def LDL_driver():
     print("LDL")
     LDL_value = user_input()
     answer = check_LDL(LDL_value)
-    output_LDL_result(LDL_value, answer) #because function doesn't process this simultaneously, output_LDL_result can be defined later
+    output_LDL_result(LDL_value, answer)
+    # because function doesn't process this simultaneously
+    # output_LDL_result can be defined later
+
 
 def output_LDL_result(LDL_value, charac):
     print("The results for an LDL value of {} is {}".format(LDL_value, charac))
 
-#Total cholesterol
+# Total cholesterol
+
+
 def check_total(total):
-    if total<200:
+    if total < 200:
         return "Normal"
     elif 200 <= total <= 239:
         return "Borderline High"
     else:
         return "High"
+
 
 def total_driver():
     print("HDL")
@@ -77,8 +91,10 @@ def total_driver():
     answer = check_total(total)
     output_total_result(total, answer)
 
+
 def output_total_result(total, charac):
     print("Your total cholesterol of {} is {}".format(total, charac))
 
+
 if __name__ == "__main__":
-    interface() #this line in main part of script will make the interface run
+    interface()  # this line in main part of script will make the interface run
