@@ -1,3 +1,29 @@
+class Patient:
+    def __init__(self):
+        # self is a predefined special variable, stands for initialize
+        self.first_name = ""
+        self.last_name = ""
+        self.patient_id = ""
+        self.age = ""
+        self.tests = []
+        # need to include self to make the variable permanent in the class
+        # for example x = 5 will disappear as soon as initialize is over
+
+    def full_name(self):
+        return "{} {}".format(self.first_name, self.last_name)
+
+
+def create_patient_entry(patient_first_name,
+                         patient_last_name, patient_id,
+                         patient_age):
+    new_patient = Patient()  # create empty class and fill in
+    new_patient.first_name = patient_first_name,
+    new_patient.last_name = patient_last_name,
+    new_patient.patient_id = patient_id,
+    new_patient.age = patient_age
+    return new_patient
+
+
 def create_patient_entry(patient_first_name,
                          patient_last_name, patient_id,
                          patient_age):
@@ -42,6 +68,14 @@ def adult_or_minor(patient):
 
 
 def main():
+    x = Patient()  # creating an isntance of patient class in object x
+    x.first_name = "David"
+    x.last_name = "Ward"
+    print(x.last_name)
+    print(type(x))
+    # this will say "__main__.Patient", main module and Patient class
+    exit()  # so that we don't need to run the lines below in main()
+
     db = []
     db[11] = create_patient_entry("Ann Ables", 11, 30)
     db[22] = create_patient_entry("Bob Boyles", 22, 34)
