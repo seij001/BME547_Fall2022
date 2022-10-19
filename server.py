@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 
-# give decorator to app to access route 
+# give decorator to app to access route
 @app.route("/", methods=["GET"])
 def server_status():
     return "Server is on."
