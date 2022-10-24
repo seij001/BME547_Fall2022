@@ -1,3 +1,6 @@
+from flask import Flask, request, jsonify
+
+
 '''
 Database format
 [{
@@ -18,13 +21,12 @@ OR
 }]
 '''
 
+
 db = []  # have this outside to make it global
 
 
-from flask import Flask, request, jsonify
-
-
 app = Flask(__name__)
+
 
 @app.route("/", methods=["GET"])
 def server_on():
@@ -33,10 +35,10 @@ def server_on():
 
 def add_patient(patient_name, patient_id, blood_type):
     new_patient = {"name": patient_name,
-                    "id": patient_id,
-                    "blood_type": blood_type,
-                    "test_name": [],
-                    "test_result": []}
+                   "id": patient_id,
+                   "blood_type": blood_type,
+                   "test_name": [],
+                   "test_result": []}
     db.append(new_patient)  # can access db as it's global
 
 
