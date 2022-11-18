@@ -58,11 +58,7 @@ def init_server():
         None
     """
     logging.basicConfig(filename="server.log", filemode='w')
-    import os
-    mongo_account = os.environ['MONGO_ACCT']
-    mongo_pswd = os.environ['MONGO_PSWD']
-    connect("mongodb+srv://mongo_account:mongo_pswd@bme547.ba348.mongodb.net/"
-            "health_db?retryWrites=true&w=majority")
+    connect("Enter Your Connect String Here")
 
 
 @app.route("/new_patient", methods=["POST"])
@@ -199,8 +195,8 @@ def add_test_worker(in_data):
     If the necessary information does not exist, the function returns an
     error message and a status code of 400.  Otherwise, another function is
     called and sent the necessary information to add the test results to
-    the correct patient.  The return message and status code from this second
-    called function is then returned as the response.
+    the correct patient.  A success message and a 200 status code is then
+    returned.
 
     Args:
         in_data (dict): Data received from the POST request.  Should be a
@@ -223,22 +219,25 @@ def add_test_worker(in_data):
 def find_patient(patient_id):
     """Finds a patient in the database with a given id.
 
-    This function queries the MongoDB database for the patient record with the
-    id found in the patient_id parameter.  If the patient is not found, the
-    boolean False is returned.  If the patient is found, that patient object
-    is returned.
+    This function iterates through the database list and compares the patient
+    id of each patient in the list against a target id.  When the target id is
+    found, that patient is returned to the calling function.  If the target id
+    is not found, a value of False is returned.
 
     Args:
         patient_id (int): the patient id of interest
 
     Returns:
-        Patient: patient information of patient with id that matches parameter
-                  id, or
+        dict: patient information of patient with id that matches parameter id,
+                or
         bool: False if no patient record with the parameter id is found.
     """
+    # This commented out during transition from internal global variable to
+    #   external MongoDB database so an intermediate version will run without
+    #   a syntax error.
     from pymodm import errors as pymodm_errors
     try:
-        found_patient = Patient.objects.raw({"_id": patient_id}).first()
+        found_patient = Patient.objects.raw({"_id": patient_id }).first()
     except pymodm_errors.DoesNotExist:
         return False
     return found_patient
@@ -247,24 +246,20 @@ def find_patient(patient_id):
 def add_test_to_patient(in_data):
     """Adds test result to target patient record
 
-    A call to the "find_patient" function returns the Patient database entry of
-    the patient with the "id" found in the "in_data" dictionary.  If no
-    patient was found, an error message and status code of 400 are returned.
-    If a patient was found, the "test_name" and "test_result" from the
-    "in_data" dictionary are then appended to the appropriate list in the
-    Patient record and the updated record is saved to MongoDB.
+    A call to the "find_patient" function returns the patient dictionary of
+    the patient with the "id" found in the "in_data" dictionary.  The
+    "test_name" and "test_result" from the "in_data" dictionary are then
+    appended to the appropriate list in the patient dictionary.
 
     Args:
         in_data (dict): Contains the patient id and test results to be added
 
     Returns:
-        str, int: A message string indicating the success or failure of the
-                    function and a status code integer
+        None
     """
     patient = find_patient(in_data["id"])
     if patient is False:
-        return "Patient ID {} not found in database.".format(in_data["id"]), \
-               400
+        return "Patient ID {} not found in database.".format(in_data["id"]), 400
     patient.test_name.append(in_data["test_name"])
     patient.test_result.append(in_data["test_result"])
     patient.save()
@@ -301,9 +296,7 @@ def get_results_worker(patient_id):
     and that the patient exists in the database.  If not, an error message is
     returned with a status code of 400.  If the patient id is valid and there
     is a patient with that id, a call is made to a function to retrieve that
-    patient from the MongoDB database.  An output dictionary is made with
-    information from the Patient record, and this dictionary is returned with
-    a status code of 200.
+    patient, and the patient dictionary is returned with a status code of 200.
 
     Args:
         patient_id (str): patient id found in variable URL
@@ -320,10 +313,7 @@ def get_results_worker(patient_id):
         return msg, 400
     patient = find_patient(int(patient_id))
     patient_output = {"name": patient.name,
-                      "id": patient.id,
-                      "blood_type": patient.blood_type,
-                      "test_names": patient.test_name,
-                      "test_results": patient.test_result}
+                      "test": patient.test_name}
     return patient_output, 200
 
 
